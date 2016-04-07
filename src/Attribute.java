@@ -4,7 +4,9 @@ public class Attribute {
 	private String attrName;
 	private ArrayList<String> values;
 	private boolean attrUsed = false;
-	boolean isContinuous;
+	private boolean isContinuous;
+	private double max;
+	private double min;
 
 	public Attribute(String name, ArrayList<String> values, boolean isContinuous) {
 		this.attrName = name;
@@ -13,6 +15,8 @@ public class Attribute {
 			this.values.add(v);
 		}
 		this.isContinuous = isContinuous;
+		this.max = Double.MIN_VALUE;
+		this.min = Double.MAX_VALUE;
 	}
 
 	public Attribute(Attribute copy) {
@@ -23,6 +27,8 @@ public class Attribute {
 		}
 		this.isContinuous = copy.isContinuous;
 		this.attrUsed = copy.attrUsed;
+		this.max = copy.max;
+		this.min = copy.min;
 	}
 
 	public String getAttrName() {
@@ -47,5 +53,21 @@ public class Attribute {
 
 	public boolean isContinuous() {
 		return this.isContinuous;
+	}
+
+	public void setMax(Double d) {
+		this.max = d;
+	}
+
+	public double getMax() {
+		return this.max;
+	}
+
+	public void setMin(Double d) {
+		this.min = d;
+	}
+
+	public double getMin() {
+		return this.min;
 	}
 }

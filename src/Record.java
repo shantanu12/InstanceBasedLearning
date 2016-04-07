@@ -19,6 +19,14 @@ public class Record {
 		values.set(i, s);
 	}
 
+	Double getDistance() {
+		return this.distance;
+	}
+
+	void setDistance(Double d) {
+		this.distance = d;
+	}
+
 	String printRecord() {
 		String line = "";
 		for (int i = 0; i < values.size(); i++) {
