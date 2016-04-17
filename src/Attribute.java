@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Attribute {
 	private String attrName;
 	private ArrayList<String> values;
-	private boolean attrUsed = false;
+	private boolean attrRelevant = true;
 	private boolean isContinuous;
 	private double max;
 	private double min;
@@ -26,7 +26,7 @@ public class Attribute {
 			this.values.add(v);
 		}
 		this.isContinuous = copy.isContinuous;
-		this.attrUsed = copy.attrUsed;
+		this.attrRelevant = copy.attrRelevant;
 		this.max = copy.max;
 		this.min = copy.min;
 	}
@@ -43,12 +43,12 @@ public class Attribute {
 		return this.values.size();
 	}
 
-	public void setAttrUsed() {
-		this.attrUsed = true;
+	public void setAttrRelevance(boolean relevance) {
+		this.attrRelevant = relevance;
 	}
 
-	public boolean isUsed() {
-		return this.attrUsed;
+	public boolean isRelevant() {
+		return this.attrRelevant;
 	}
 
 	public boolean isContinuous() {

@@ -59,17 +59,34 @@ public class Master {
 			}
 
 			IBL knn = new IBL();
+			System.out.println("Iteration");
 			int correct = 0;
 			for (Record instance : testingList) {
-				String decison = knn.kNearestNeighbor(trainingList, attributes, reader.targetAttributeIndex, instance,
-						5);
+				ArrayList<Record> kNearestNeighbors = knn.kNearestNeighbor(trainingList, attributes,
+						reader.targetAttributeIndex, instance, 10);
+				String decison = knn.getDecision(attributes, reader.targetAttributeIndex, kNearestNeighbors);
 				if (decison.equals(instance.getValue(reader.targetAttributeIndex))) {
 					correct++;
 				}
 			}
 			System.out.println("Correct " + correct);
 			System.out.println("Total " + testingList.size());
-
+			double tau = 1 / Math.sqrt(0.95 * trainingList.size());
+			knn.relief(trainingList, attributes, reader.targetAttributeIndex, tau);
+			correct = 0;
+			for (Record instance : testingList) {
+				ArrayList<Record> kNearestNeighbors = knn.kNearestNeighbor(trainingList, attributes,
+						reader.targetAttributeIndex, instance, 10);
+				String decison = knn.getDecision(attributes, reader.targetAttributeIndex, kNearestNeighbors);
+				if (decison.equals(instance.getValue(reader.targetAttributeIndex))) {
+					correct++;
+				}
+			}
+			System.out.println("Correct " + correct);
+			System.out.println("Total " + testingList.size());
+			for (int j = 0; j < attributes.size(); j++) {
+				attributes.get(j).setAttrRelevance(true);
+			}
 		}
 	}
 }
